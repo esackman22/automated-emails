@@ -7,7 +7,7 @@ class NewsFeed:
     base_url = 'https://newsapi.org/v2/everything?'
     api_key = 'f37d6874ecb045c3a3fee36bd76cdbf1'
 
-    def __init__(self, interest, from_date, to_date, language):
+    def __init__(self, interest, from_date, to_date, language='en'):
         self.language = language
         self.to_date = to_date
         self.from_date = from_date
@@ -31,7 +31,7 @@ class NewsFeed:
         content = response.json()
         return content
 
-    def get(self):
+    def _get_articles(self):
 
         content = self._crawl()
         articles = content['articles'][:20]
@@ -39,7 +39,7 @@ class NewsFeed:
 
     def build_email(self):
 
-        articles = self.get()
+        articles = self._get_articles()
         email_body = ''
         for article in articles:
             email_body += article['title'] + '\n' + article['url'] + '\n\n'

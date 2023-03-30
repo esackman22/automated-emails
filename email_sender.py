@@ -18,7 +18,7 @@ for index, row in people.iterrows():
     to_address = row['email']
     interest = row['interest']
     name = row['name']
-    news_feed = NewsFeed(interest, yesterday, today, 'en')
+    news_feed = NewsFeed(interest, yesterday, today)
     email_body = news_feed.build_email()
     email = yagmail.SMTP(user=creds.email_address, password=creds.password)
     email.send(to=to_address,
